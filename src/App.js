@@ -1,8 +1,12 @@
-import './App.css';
+import Mainarea from "./Components/Mainarea";
+import Navbar from "./Components/Navbar";
 
 function App() {
   return (
-    <h1>Hello World!</h1>
+    <>
+      <Navbar />
+      <Mainarea />
+    </>
   );
 }
 
