@@ -13,7 +13,14 @@ export default function Mainarea(props) {
             tempCardArray.push(i);
         }
         console.log(tempCardArray);
-        setCardArray(tempCardArray);
+        let shuffledArray = [];
+        for (let i = 0; i < difficulty*difficulty; i++) {
+            const randomIndex = Math.floor(Math.random()*tempCardArray.length);
+            shuffledArray.push(tempCardArray[randomIndex]);
+            tempCardArray.splice(randomIndex, 1);
+        }
+        console.log(shuffledArray);
+        setCardArray(shuffledArray);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -22,7 +29,7 @@ export default function Mainarea(props) {
             <h1 className="text-center">Flipper</h1>
             <div className="row">
                 {cardArray.map((element)=>{
-                    return <Card key={element} value={element} />
+                    return <Card key={element} visible={false} value={element} />
                 })}
             </div>
         </div>
