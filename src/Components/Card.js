@@ -15,7 +15,7 @@ export default function Card(props) {
     return (
         <div className='col-3'>
             <center>
-                <div className="card mx-2 my-3 py-2">
+                <div className="card mx-2 my-3 py-2" onClick={()=>props.handleSelection(props.value)}>
                     <h2><i className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i> {props.value}</h2>
                 </div>
             </center>
