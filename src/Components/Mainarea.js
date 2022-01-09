@@ -9,6 +9,9 @@ export default function Mainarea(props) {
     const [revealedCardsArray, setRevealedCardsArray] = useState([]);
     const [selection1, setSelection1] = useState(null);
     const [selection2, setSelection2] = useState(null);
+    const [totalFlips, setTotalFlips] = useState(0);
+    const [flipsRemaining, setflipsRemaining] = useState((props.difficulty * props.difficulty)/2);
+    const [canSelect, setCanSelect] = useState(true);
 
     useEffect(() => {
         let tempCardArray = [];
@@ -32,18 +35,20 @@ export default function Mainarea(props) {
     }, [])
 
     const handleSelection = (value) => {
-        console.log("Clicked", value);
-        if (selection1 === null) {
-            setSelection1(value);
-            let newVisibleCardsArray = revealedCardsArray;
-            newVisibleCardsArray[value] = true;
-            setRevealedCardsArray(newVisibleCardsArray);
-        }
-        else {
-            setSelection2(value);
-            let newVisibleCardsArray = revealedCardsArray;
-            newVisibleCardsArray[value] = true;
-            setRevealedCardsArray(newVisibleCardsArray);
+        if (canSelect) {
+            console.log("Clicked", value);
+            if (selection1 === null) {
+                setSelection1(value);
+                let newVisibleCardsArray = revealedCardsArray;
+                newVisibleCardsArray[value] = true;
+                setRevealedCardsArray(newVisibleCardsArray);
+            }
+            else if (selection1 !== value) {
+                setSelection2(value);
+                let newVisibleCardsArray = revealedCardsArray;
+                newVisibleCardsArray[value] = true;
+                setRevealedCardsArray(newVisibleCardsArray);
+            }
         }
     }
 
@@ -61,15 +66,19 @@ export default function Mainarea(props) {
 
     useEffect(() => {
         if (selection1 !== null && selection2 !== null) {
+            setTotalFlips(prevState => prevState+1);
             if (selection1 % 8 === selection2 % 8) {
                 console.log("Same");
                 handleReset();
+                setflipsRemaining(prevState => prevState-1);
             }
             else {
                 console.log("Not Same");
+                setCanSelect(false);
                 setTimeout(() => {
                     hideCards();
                     handleReset();
+                    setCanSelect(true);
                 }, 1000);
             }
         }
@@ -80,6 +89,8 @@ export default function Mainarea(props) {
             <h1 className="text-center">Flipper</h1>
             <h3>Selection1: {selection1}</h3>
             <h3>Selection2: {selection2}</h3>
+            <h3>totalFlips: {totalFlips}</h3>
+            <h3>flipsRemaining: {flipsRemaining}</h3>
             <div className="row">
                 {cardArray.map((element) => {
                     return <Card key={element} visible={false} value={element} visible={revealedCardsArray[element]} handleSelection={handleSelection} />
