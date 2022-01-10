@@ -108,15 +108,25 @@ export default function Mainarea(props) {
     return (
         <div className='container my-3'>
             <h1 className="text-center">Flipper</h1>
-            <h3>Selection1: {selection1}</h3>
-            <h3>Selection2: {selection2}</h3>
-            <h3>totalFlips: {totalFlips}</h3>
-            <h3>flipsRemaining: {flipsRemaining}</h3>
-            <div className="row">
-                {cardArray.map((element) => {
-                    return <Card key={element} value={element} visible={revealedCardsArray[element]} bgCol={cardsColArr[element]} handleSelection={handleSelection} />
-                })}
-            </div>
+            {
+                flipsRemaining>0 ?
+                <>
+                <div class="d-flex justify-content-between py-2">
+                    <h4>Total Flips Made: {totalFlips}</h4>
+                    <h4>00:00</h4>
+                    <h4>Flips Remaining: {flipsRemaining}</h4>
+                </div>
+                <div className="row">
+                    {cardArray.map((element) => {
+                        return <Card key={element} value={element} visible={revealedCardsArray[element]} bgCol={cardsColArr[element]} handleSelection={handleSelection} />
+                    })}
+                </div> </>:
+                <div className="my-4">
+                    <h2 className='text-center'>You Win</h2>
+                    <h4 className='text-center'>Total Flips Made: {totalFlips}</h4>
+                    <h4 className='text-center'>Total Time Taken: 00:00</h4>
+                </div>
+            }
         </div>
     )
 }
