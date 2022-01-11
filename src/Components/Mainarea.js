@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Card from './Card'
+import Timer from './Timer';
 
 export default function Mainarea(props) {
 
@@ -13,6 +14,8 @@ export default function Mainarea(props) {
     const [totalFlips, setTotalFlips] = useState(0);
     const [flipsRemaining, setflipsRemaining] = useState((props.difficulty * props.difficulty)/2);
     const [canSelect, setCanSelect] = useState(true);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
         let tempCardArray = [];
@@ -105,15 +108,31 @@ export default function Mainarea(props) {
         }
     }, [selection2]);
 
+    const handleTimeIncrement = () => {
+        setSeconds(prevState => prevState+1);
+    }
+
+    useEffect(() => {
+        if (seconds === 60) {
+            setSeconds(0);
+            setMinutes(prevState => prevState+1);
+        }
+    }, [seconds]);
+
     return (
         <div className='container my-3'>
             <h1 className="text-center">Flipper</h1>
             {
                 flipsRemaining>0 ?
                 <>
-                <div class="d-flex justify-content-between py-2">
+                <div className="d-flex justify-content-between py-2">
                     <h4>Total Flips Made: {totalFlips}</h4>
-                    <h4>00:00</h4>
+                    <h4 className='d-flex align-items-center'>
+                        <Timer
+                        minutes={minutes}
+                        seconds={seconds}
+                        incrementTime={handleTimeIncrement} />
+                    </h4>
                     <h4>Flips Remaining: {flipsRemaining}</h4>
                 </div>
                 <div className="row">
@@ -124,7 +143,7 @@ export default function Mainarea(props) {
                 <div className="my-4">
                     <h2 className='text-center'>You Win</h2>
                     <h4 className='text-center'>Total Flips Made: {totalFlips}</h4>
-                    <h4 className='text-center'>Total Time Taken: 00:00</h4>
+                    <h4 className='text-center'>Total Time Taken: {minutes}:{seconds}</h4>
                 </div>
             }
         </div>
