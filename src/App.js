@@ -4,7 +4,7 @@ import {useState} from 'react';
 
 
 const App = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
 
   const handleThemeChange = () => {
     if (theme === 'light') {
