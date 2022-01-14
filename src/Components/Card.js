@@ -16,7 +16,7 @@ export default function Card(props) {
         <div className='col-3'>
             <center>
                 <div className={`card bg-${props.theme} mx-2 my-3 py-2`} onClick={()=>props.handleSelection(props.value)}>
-                    <h2 className={`text-${props.theme==="light"?"dark":"light"}`}><i style={{color: props.bgCol==="success"?"green":props.bgCol==="danger"?"red":""}} className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i> {props.value%8}</h2>
+                    <h2 className={`text-${props.theme==="light"?"dark":"light"}`}><i style={{color: props.bgCol==="success"?"green":props.bgCol==="danger"?"red":""}} className={`${props.visible?iconClass[props.value%8]:questionmarkClass}`}></i></h2>
                 </div>
             </center>
         </div>
