@@ -31,7 +31,9 @@ const App = () => {
       <Navbar theme={theme} switchTheme={handleThemeChange} />
       <Routes>
         <Route path="/" element={<Home theme={theme} />} />
-        <Route path="/play" element={<Mainarea difficulty="4" theme={theme} />} />
+        <Route path="/play/easy" element={<Mainarea key="4" difficulty="4" theme={theme} />} />
+        <Route path="/play/medium" element={<Mainarea key="5" difficulty="5" theme={theme} />} />
+        <Route path="/play/hard" element={<Mainarea key="6" difficulty="6" theme={theme} />} />
       </Routes>
     </BrowserRouter>
       
