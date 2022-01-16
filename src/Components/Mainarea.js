@@ -6,13 +6,6 @@ export default function Mainarea(props) {
 
     const theme = props.theme;
 
-    if (theme === 'light') {
-        document.body.style.backgroundColor = "#fff";
-    }
-    else {
-        document.body.style.backgroundColor = "#181818";
-    }
-
     const { difficulty } = props;
 
     const [cardArray, setCardArray] = useState([]);
