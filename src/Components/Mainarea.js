@@ -7,6 +7,7 @@ export default function Mainarea(props) {
     const theme = props.theme;
 
     const { difficulty } = props;
+    const modValue = difficulty * 2;
 
     const [cardArray, setCardArray] = useState([]);
     const [revealedCardsArray, setRevealedCardsArray] = useState([]);
@@ -14,20 +15,20 @@ export default function Mainarea(props) {
     const [selection1, setSelection1] = useState(null);
     const [selection2, setSelection2] = useState(null);
     const [totalFlips, setTotalFlips] = useState(0);
-    const [flipsRemaining, setflipsRemaining] = useState((props.difficulty * props.difficulty) / 2);
+    const [flipsRemaining, setflipsRemaining] = useState((difficulty * 4) / 2);
     const [canSelect, setCanSelect] = useState(true);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
 
     useEffect(() => {
         let tempCardArray = [];
-        for (let i = 0; i < difficulty * difficulty; i++) {
+        for (let i = 0; i < difficulty * 4; i++) {
             tempCardArray.push(i);
         }
         let shuffledArray = [];
         let revealedCards = [];
         let tempCardColArr = [];
-        for (let i = 0; i < difficulty * difficulty; i++) {
+        for (let i = 0; i < difficulty * 4; i++) {
             const randomIndex = Math.floor(Math.random() * tempCardArray.length);
             shuffledArray.push(tempCardArray[randomIndex]);
             tempCardArray.splice(randomIndex, 1);
@@ -83,7 +84,7 @@ export default function Mainarea(props) {
             let newCardColArr = { ...cardsColArr };
             newCardColArr[selection2] = "info";
             setcardsColArr(newCardColArr);
-            if (selection1 % 8 === selection2 % 8) {
+            if (selection1 % modValue === selection2 % modValue) {
                 newCardColArr = { ...cardsColArr };
                 newCardColArr[selection1] = "success";
                 newCardColArr[selection2] = "success";
@@ -145,6 +146,7 @@ export default function Mainarea(props) {
                                     visible={revealedCardsArray[element]}
                                     bgCol={cardsColArr[element]}
                                     handleSelection={handleSelection}
+                                    difficulty={difficulty}
                                     theme={theme} />
                             })}
                         </div> </> :
