@@ -76,6 +76,7 @@ export default function Mainarea(props) {
             newCardColArr[selection1] = "info";
             setcardsColArr(newCardColArr);
         }
+        // eslint-disable-next-line
     }, [selection1]);
 
     useEffect(() => {
@@ -109,6 +110,7 @@ export default function Mainarea(props) {
                 }, 1000);
             }
         }
+        // eslint-disable-next-line
     }, [selection2]);
 
     const handleTimeIncrement = () => {
